@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DocentesEditDlg" widgetVar="DocentesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDocentesTitle}">
+            <h:form id="DocentesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{docentesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDocentesLabel_docDocumento}" for="docDocumento" />
+                        <p:inputText id="docDocumento" value="#{docentesController.selected.docDocumento}" title="#{bundle.EditDocentesTitle_docDocumento}" required="true" requiredMessage="#{bundle.EditDocentesRequiredMessage_docDocumento}"/>
+                        <p:outputLabel value="#{bundle.EditDocentesLabel_docNombres}" for="docNombres" />
+                        <p:inputText id="docNombres" value="#{docentesController.selected.docNombres}" title="#{bundle.EditDocentesTitle_docNombres}" required="true" requiredMessage="#{bundle.EditDocentesRequiredMessage_docNombres}"/>
+                        <p:outputLabel value="#{bundle.EditDocentesLabel_docApellidos}" for="docApellidos" />
+                        <p:inputText id="docApellidos" value="#{docentesController.selected.docApellidos}" title="#{bundle.EditDocentesTitle_docApellidos}" required="true" requiredMessage="#{bundle.EditDocentesRequiredMessage_docApellidos}"/>
+                        <p:outputLabel value="#{bundle.EditDocentesLabel_docCorreo}" for="docCorreo" />
+                        <p:inputText id="docCorreo" value="#{docentesController.selected.docCorreo}" title="#{bundle.EditDocentesTitle_docCorreo}" required="true" requiredMessage="#{bundle.EditDocentesRequiredMessage_docCorreo}"/>
+                        <p:outputLabel value="#{bundle.EditDocentesLabel_docTipocontrato}" for="docTipocontrato" />
+                          <p:selectOneMenu id="docTipocontrato" value="#{docentesController.selected.docTipocontrato}" >
+                            <f:selectItem itemLabel="Prestación de Servicios" itemValue="1"/>
+                            <f:selectItem itemLabel="Planta" itemValue="2"/>
+                            <f:selectItem itemLabel="Catedra" itemValue="3"/>
+                            <f:selectItem itemLabel="Otro" itemValue="4"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDocentesLabel_docPrograma}" for="docPrograma" />
+                        <p:selectOneMenu id="docPrograma" value="#{docentesController.selected.docPrograma}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{programasController.itemsAvailableSelectOne}"
+                                           var="docProgramaItem"
+                                           itemValue="#{docProgramaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{docentesController.update}" value="#{bundle.Save}" update="display,:DocentesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DocentesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DocentesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsignaturasViewDlg" widgetVar="AsignaturasViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAsignaturasTitle}">
+            <h:form id="AsignaturasViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{asignaturasController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAsignaturasLabel_asiId}"/>
+                        <h:outputText value="#{asignaturasController.selected.asiId}" title="#{bundle.ViewAsignaturasTitle_asiId}"/>
+                        <h:outputText value="#{bundle.ViewAsignaturasLabel_asiNombre}"/>
+                        <h:outputText value="#{asignaturasController.selected.asiNombre}" title="#{bundle.ViewAsignaturasTitle_asiNombre}"/>
+                        <h:outputText value="#{bundle.ViewAsignaturasLabel_asiTipo}"/>
+                        <h:outputText value="#{asignaturasController.selected.asiTipo}" title="#{bundle.ViewAsignaturasTitle_asiTipo}"/>
+                        <h:outputText value="#{bundle.ViewAsignaturasLabel_asiCreditos}"/>
+                        <h:outputText value="#{asignaturasController.selected.asiCreditos}" title="#{bundle.ViewAsignaturasTitle_asiCreditos}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AsignaturasViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

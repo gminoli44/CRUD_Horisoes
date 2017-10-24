@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProgramasEditDlg" widgetVar="ProgramasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProgramasTitle}">
+            <h:form id="ProgramasEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{programasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProgramasLabel_proId}" for="proId" />
+                        <p:inputText id="proId" value="#{programasController.selected.proId}" title="#{bundle.EditProgramasTitle_proId}" required="true" requiredMessage="#{bundle.EditProgramasRequiredMessage_proId}"/>
+                        <p:outputLabel value="#{bundle.EditProgramasLabel_proNombre}" for="proNombre" />
+                        <p:inputText id="proNombre" value="#{programasController.selected.proNombre}" title="#{bundle.EditProgramasTitle_proNombre}" required="true" requiredMessage="#{bundle.EditProgramasRequiredMessage_proNombre}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{programasController.update}" value="#{bundle.Save}" update="display,:ProgramasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProgramasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProgramasEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
